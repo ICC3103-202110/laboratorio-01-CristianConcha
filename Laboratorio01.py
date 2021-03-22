@@ -4,8 +4,7 @@ Number_cards = 8 #int(input("How many cards do you want to play: "))
 Pair_of_cards = Number_cards * 2
 
 
-
-Fila = []
+Fila = [] #coordenadas
 coordenada_x = 0
 for fila in range(4):
     Columna = []
@@ -21,7 +20,7 @@ for fila in range(4):
 print(Fila[3][3])
 print()
 
-numeros =[]
+numeros =[] #numeros aleatorios
 Filanum = []
 
 while len(Filanum) <= 4:
@@ -34,18 +33,12 @@ while len(Filanum) <= 4:
             Columnanum.append(card)
         else:
             continue
-
-
-        
-    
-
     Filanum.append(Columnanum)
 
     print(Columnanum)
 print(numeros.count(3))
-
+print("jedjvciecjoiew")
 print(Filanum[3][3])
-
 
 
 
