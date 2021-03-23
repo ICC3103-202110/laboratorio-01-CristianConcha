@@ -39,36 +39,46 @@ def Condition(card1, card2, tablero, x, y):
     return tablero
     
 
-Number_cards = 8 #int(input("How many cards do you want to play: "))
+Number_cards =int(input("How many cards do you want to play: "))
 Pair_of_cards = Number_cards * 2
+Board_Row = Pair_of_cards
 
+while Board_Row % 4 != 0:
+    Board_Row += 1
+print(Board_Row)
 
- 
 Numbers = []  
 Number_Row = []
 Coordinate_Row = []
 
-for row in range(4): ## Bien
+print((Board_Row // 4))
+
+for row in range(Board_Row // 4):
     Column_Number = []
     Coordinate_Column = []
 
-    while len(Column_Number) <= 3:
-        card = random.randint(1, 9)
+    while len(Column_Number) < 4:
+        card = random.randint(1, (Number_cards + 1))
 
         if Numbers.count(card) < 2:
             Numbers.append(card)
             Column_Number.append(card)
-            Coordinate_Column.append("(%d, %d)" % (row, len(Column_Number)-1))
+            Coordinate_Column.append("(%d, %d)" % (row, len(Column_Number) - 1))
+
+        elif len(Numbers) == Pair_of_cards:
+            Column_Number.append("")
+            Coordinate_Column.append("      ")
+
         else:
             continue
+        
 
     Number_Row.append(Column_Number)
     Coordinate_Row.append(Coordinate_Column)
 
-    print(Column_Number)  ### Borrar
-print(Coordinate_Row[3][3])
+    print(Column_Number) #Borrar
 
-
+"""
 Player_1 = 0
 Player_2 = 0
 x = 1
@@ -119,7 +129,7 @@ while x <= 2:  # len(Numbers)== 0
             Player_2 += 1
         else:
             x -=1
-  
+"""  
 
 
 
