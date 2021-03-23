@@ -5,11 +5,10 @@ import re
 def Board(tablero): #Imprime tablero
     for row in range(len(tablero)):
         print(tablero[row])
-    
+    print()
 
 
 def Number_Board(tablero, x, y):
-
 
     tablero[x].pop(y)
     tablero[x].insert(y, Number_Row[x][y])
@@ -25,7 +24,6 @@ def Condition(card1, card2, tablero, x, y):
         tablero[x].pop(y)
         tablero[x].insert(y, "      ")
         
-    
     else:
         tablero[x].pop(y)
         tablero[x].insert(y, ("(%d, %d)" % (x, y)))
@@ -33,17 +31,15 @@ def Condition(card1, card2, tablero, x, y):
         print()
         print(Coordinate_Row[x][y])
         print()
- 
-
-    
-    return tablero
     
 
+
+            
 Number_cards =int(input("How many cards do you want to play: "))
 Pair_of_cards = Number_cards * 2
 Board_Row = Pair_of_cards
 
-while Board_Row % 4 != 0:
+while Board_Row % 4 != 0: #Board Dimensions 
     Board_Row += 1
 print(Board_Row)
 
@@ -53,7 +49,7 @@ Coordinate_Row = []
 
 print((Board_Row // 4))
 
-for row in range(Board_Row // 4):
+for row in range(Board_Row // 4): 
     Column_Number = []
     Coordinate_Column = []
 
@@ -78,45 +74,33 @@ for row in range(Board_Row // 4):
 
     print(Column_Number) #Borrar
 
-"""
+
 Player_1 = 0
 Player_2 = 0
 x = 1
-d = 0
 tablero = Coordinate_Row
 
-while x <= 2:  # len(Numbers)== 0
-    
+while len(Numbers) >= 1:  
     print("It´s player %d turn:  \n" % (x))
     Board(tablero)
     
         
-    coordenada = input("Enter a coordinate:")
-    d = re.sub(r"[^\w\s]", "", coordenada) 
-    print()
-    print(d[0])  # Cambiar coordenadas
-    print(d[1])
-    x1 = int(d[0])
-    y1 = int(d[1])
-
-    card1 = (Number_Board(tablero, x1, y1))
+    coord_x = int(input("Enter coordinate x: "))
+    coord_y = int(input("Enter coordinate y: "))
+    print(coord_x, coord_y)
+    card1 = (Number_Board(tablero, coord_x, coord_y))
     print()
     print(card1)
 
-
-    coordenada = input("Enter a coordinate:")
-    d = re.sub(r"[^\w\s]", "", coordenada)
-    print()
-    print(d[0])  # Cambiar coordenadas
-    print(d[1])
-    x2 = int(d[0])
-    y2 = int(d[1])
-    card2 = (Number_Board(tablero, x2, y2))
+    coord_x2 = int(input("Enter coordinate x: "))
+    coord_y2 = int(input("Enter coordinate y: "))
+    print(coord_x2, coord_y2)
+    card2 = (Number_Board(tablero, coord_x2, coord_y2))
     print()
     print(card2)
 
-    Condition(card1, card2, tablero, x1, y1)
-    Condition(card1, card2, tablero, x2, y2)
+    Condition(card1, card2, tablero, coord_x, coord_y)
+    Condition(card1, card2, tablero, coord_x2, coord_y2)
     Board(tablero)
 
     if x == 1:
@@ -128,9 +112,15 @@ while x <= 2:  # len(Numbers)== 0
         if card1 == card2:
             Player_2 += 1
         else:
-            x -=1
-"""  
+            x -= 1
 
+    if len(Numbers) == 0:
+        if Player_1 > Player_2:
+            print("Player 1 win, with %d points" % (Player_1))
+        elif Player_1 < Player_2:
+            print("Player 2 win, with %d points" % (Player_2))
+        elif Player_1 == Player_2:
+            print("Tie between player 1 and player 2, with  %d points" %(Player_1))
 
 
 
