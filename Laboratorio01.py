@@ -1,14 +1,14 @@
 from numpy import random
 
-def Print_Board(Game_Board):  # Imprime tablero
+def Print_Board(Game_Board):  # Print Board
     for row in range(len(Game_Board)):
         for column in range(4):
             print(Game_Board[row][column], end=" ")
         print()
     print()
 
-def Number_Board(Game_Board, x, y):
-
+def Number_Board(Game_Board, x, y): #Insert number and coordinate in Board
+                                                          
     Game_Board[x].pop(y)
     Game_Board[x].insert(y, ("  % d  " % (Number_Row[x][y])))
     card = Number_Row[x][y]
@@ -16,7 +16,7 @@ def Number_Board(Game_Board, x, y):
     return card
 
 
-def Condition(card1, card2, Game_Board, x, y):
+def Condition(card1, card2, Game_Board, x, y): #Correct card or not
 
     if card1 == card2:
         Numbers.remove(card1)
@@ -108,7 +108,7 @@ while len(Numbers) >= 1:
     Condition(card1, card2, Game_Board, coord_x2, coord_y2)
     Print_Board(Game_Board)
 
-    if Turn == 1:
+    if Turn == 1: # Players score
         if card1 == card2:
             Player_1 += 1
         else:
@@ -119,7 +119,7 @@ while len(Numbers) >= 1:
         else:
             Turn -= 1
 
-    if len(Numbers) == 0:
+    if len(Numbers) == 0: # Win player
         if Player_1 > Player_2:
             print("Player 1 win, with %d points" % (Player_1))
 
