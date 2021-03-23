@@ -58,11 +58,9 @@ for row in range(Board_Row // 4):
         else:
             continue
         
-
     Number_Row.append(Column_Number)
     Coordinate_Row.append(Coordinate_Column)
 
-    print(Column_Number) #Borrar
 
 
 Player_1 = 0
@@ -79,34 +77,28 @@ while len(Numbers) >= 1:
         coord_x = int(input("Enter coordinate x: "))
         coord_y = int(input("Enter coordinate y: "))
 
-        if (coord_x < (len(Game_Board))):
-            if (coord_y < 4):
-                card1 = (Number_Board(Game_Board, coord_x, coord_y))
-                Great_Input += 1
-            else:
-                print("Coordinate number not valid \n")
+        if (coord_x < (len(Game_Board)) and ((coord_y < 4))):
+
+            card1 = (Number_Board(Game_Board, coord_x, coord_y))
+            Great_Input += 1
         else:
             print("Coordinate number not valid \n")
+
 
     while Great_Input == 1:  # Corroborate the coordinate 2 input
         coord_x2 = int(input("Enter coordinate x: "))
         coord_y2 = int(input("Enter coordinate y: "))
     
-        if (coord_x2 < (len(Game_Board))):
-            if (coord_y2 < 4):
-                card1 = (Number_Board(Game_Board, coord_x, coord_y))
-                Great_Input += 1
-            else:
-                print("Coordinate number not valid \n")
+        if (coord_x2 < (len(Game_Board)) and ((coord_y2 < 4))):
+            card2 = (Number_Board(Game_Board, coord_x2, coord_y2))
+            Great_Input += 1
         else:
             print("Coordinate number not valid \n")
 
     
-    card2 = (Number_Board(Game_Board, coord_x2, coord_y2))
 
     Condition(card1, card2, Game_Board, coord_x, coord_y)
     Condition(card1, card2, Game_Board, coord_x2, coord_y2)
-    Print_Board(Game_Board)
 
     if Turn == 1: # Players score
         if card1 == card2:
