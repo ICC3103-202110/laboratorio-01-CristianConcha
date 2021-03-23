@@ -1,53 +1,43 @@
 from numpy import random
 
-import re
-
-def Board(tablero): #Imprime tablero
-    for row in range(len(tablero)):
-        print(tablero[row])
+def Print_Board(Game_Board):  # Imprime tablero
+    for row in range(len(Game_Board)):
+        for column in range(4):
+            print(Game_Board[row][column], end=" ")
+        print()
     print()
 
+def Number_Board(Game_Board, x, y):
 
-def Number_Board(tablero, x, y):
-
-    tablero[x].pop(y)
-    tablero[x].insert(y, Number_Row[x][y])
+    Game_Board[x].pop(y)
+    Game_Board[x].insert(y, ("  % d  " % (Number_Row[x][y])))
     card = Number_Row[x][y]
-    Board(tablero)
+    Print_Board(Game_Board)
     return card
 
 
-def Condition(card1, card2, tablero, x, y): 
+def Condition(card1, card2, Game_Board, x, y):
 
     if card1 == card2:
         Numbers.remove(card1)
-        tablero[x].pop(y)
-        tablero[x].insert(y, "      ")
+        Game_Board[x].pop(y)
+        Game_Board[x].insert(y, "      ")
         
     else:
-        tablero[x].pop(y)
-        tablero[x].insert(y, ("(%d, %d)" % (x, y)))
-
-        print()
-        print(Coordinate_Row[x][y])
-        print()
-    
+        Game_Board[x].pop(y)
+        Game_Board[x].insert(y, ("(%d, %d)" % (x, y)))
 
 
-            
 Number_cards =int(input("How many cards do you want to play: "))
 Pair_of_cards = Number_cards * 2
 Board_Row = Pair_of_cards
 
 while Board_Row % 4 != 0: #Board Dimensions 
     Board_Row += 1
-print(Board_Row)
 
 Numbers = []  
 Number_Row = []
 Coordinate_Row = []
-
-print((Board_Row // 4))
 
 for row in range(Board_Row // 4): 
     Column_Number = []
@@ -77,51 +67,67 @@ for row in range(Board_Row // 4):
 
 Player_1 = 0
 Player_2 = 0
-x = 1
-tablero = Coordinate_Row
+Turn = 1
+Game_Board = Coordinate_Row
 
 while len(Numbers) >= 1:  
-    print("It´s player %d turn:  \n" % (x))
-    Board(tablero)
+    print("It´s player %d turn:  \n" % (Turn))
+    Print_Board(Game_Board)
     
-        
-    coord_x = int(input("Enter coordinate x: "))
-    coord_y = int(input("Enter coordinate y: "))
-    print(coord_x, coord_y)
-    card1 = (Number_Board(tablero, coord_x, coord_y))
-    print()
-    print(card1)
+    Great_Input = 0
+    while Great_Input == 0: #Corroborate the coordinate 1 input
+        coord_x = int(input("Enter coordinate x: "))
+        coord_y = int(input("Enter coordinate y: "))
 
-    coord_x2 = int(input("Enter coordinate x: "))
-    coord_y2 = int(input("Enter coordinate y: "))
-    print(coord_x2, coord_y2)
-    card2 = (Number_Board(tablero, coord_x2, coord_y2))
-    print()
-    print(card2)
+        if (coord_x < (len(Game_Board))):
+            if (coord_y < 4):
+                card1 = (Number_Board(Game_Board, coord_x, coord_y))
+                Great_Input += 1
+            else:
+                print("Coordinate number not valid \n")
+        else:
+            print("Coordinate number not valid \n")
 
-    Condition(card1, card2, tablero, coord_x, coord_y)
-    Condition(card1, card2, tablero, coord_x2, coord_y2)
-    Board(tablero)
+    while Great_Input == 1:  # Corroborate the coordinate 2 input
+        coord_x2 = int(input("Enter coordinate x: "))
+        coord_y2 = int(input("Enter coordinate y: "))
+    
+        if (coord_x2 < (len(Game_Board))):
+            if (coord_y2 < 4):
+                card1 = (Number_Board(Game_Board, coord_x, coord_y))
+                Great_Input += 1
+            else:
+                print("Coordinate number not valid \n")
+        else:
+            print("Coordinate number not valid \n")
 
-    if x == 1:
+    
+    card2 = (Number_Board(Game_Board, coord_x2, coord_y2))
+
+    Condition(card1, card2, Game_Board, coord_x, coord_y)
+    Condition(card1, card2, Game_Board, coord_x2, coord_y2)
+    Print_Board(Game_Board)
+
+    if Turn == 1:
         if card1 == card2:
             Player_1 += 1
         else:
-            x += 1
-    elif x == 2:
+            Turn += 1
+    elif Turn == 2:
         if card1 == card2:
             Player_2 += 1
         else:
-            x -= 1
+            Turn -= 1
 
     if len(Numbers) == 0:
         if Player_1 > Player_2:
             print("Player 1 win, with %d points" % (Player_1))
+
         elif Player_1 < Player_2:
             print("Player 2 win, with %d points" % (Player_2))
+
         elif Player_1 == Player_2:
             print("Tie between player 1 and player 2, with  %d points" %(Player_1))
-
 
 
 
