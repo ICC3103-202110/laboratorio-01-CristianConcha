@@ -1,10 +1,13 @@
 from numpy import random
 
 def Print_Board(Game_Board):  # Print Board
+    print("-----------------------------------")
     for row in range(len(Game_Board)):
         for column in range(4):
             print(Game_Board[row][column], end=" ")
+            print("|", end=" ")
         print()
+        print("-----------------------------------")
     print()
 
 def Number_Board(Game_Board, x, y): #Insert number and coordinate in Board
