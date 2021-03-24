@@ -22,6 +22,7 @@ def Condition(card1, card2, Game_Board, x, y): #Correct card or not
         Numbers.remove(card1)
         Game_Board[x].pop(y)
         Game_Board[x].insert(y, "      ")
+        Coordinate_Data.remove(("(%d, %d)" % (x, y)))
         
     else:
         Game_Board[x].pop(y)
@@ -38,6 +39,7 @@ while Board_Row % 4 != 0: #Board Dimensions
 Numbers = []  
 Number_Row = []
 Coordinate_Row = []
+Coordinate_Data = [] #Total coordinate
 
 for row in range(Board_Row // 4): 
     Column_Number = []
@@ -49,6 +51,7 @@ for row in range(Board_Row // 4):
         if Numbers.count(card) < 2:
             Numbers.append(card)
             Column_Number.append(card)
+            Coordinate_Data.append("(%d, %d)" %(row, len(Column_Number) - 1))
             Coordinate_Column.append("(%d, %d)" % (row, len(Column_Number) - 1))
 
         elif len(Numbers) == Pair_of_cards:
@@ -73,30 +76,40 @@ while len(Numbers) >= 1:
     Print_Board(Game_Board)
     
     Great_Input = 0
-    while Great_Input == 0: #Corroborate the coordinate 1 input
+    while Great_Input == 0:  
         coord_x = int(input("Enter coordinate x: "))
         coord_y = int(input("Enter coordinate y: "))
 
-        if (coord_x < (len(Game_Board)) and ((coord_y < 4))):
+        if (coord_x < (len(Game_Board)) and ((coord_y < 4))):  # Corroborate the coordinate 1 input
+            if ("(%d, %d)" % (coord_x, coord_y)) in Coordinate_Data: # Corroborate if the coordine was used
 
-            card1 = (Number_Board(Game_Board, coord_x, coord_y))
-            Great_Input += 1
+                card1 = (Number_Board(Game_Board, coord_x, coord_y))
+                Great_Input += 1
+
+            else:
+                print("The current coordinate has already been used or not exist \n")
+
         else:
             print("Coordinate number not valid \n")
 
 
-    while Great_Input == 1:  # Corroborate the coordinate 2 input
+    while Great_Input == 1: 
         coord_x2 = int(input("Enter coordinate x: "))
         coord_y2 = int(input("Enter coordinate y: "))
     
-        if (coord_x2 < (len(Game_Board)) and ((coord_y2 < 4))):
-            card2 = (Number_Board(Game_Board, coord_x2, coord_y2))
-            Great_Input += 1
+        if (coord_x2 < (len(Game_Board)) and ((coord_y2 < 4))):  # Corroborate the coordinate 2 input
+            if ("(%d, %d)" % (coord_x2, coord_y2)) in Coordinate_Data: # Corroborate if the coordine was used
+
+                card2 = (Number_Board(Game_Board, coord_x2, coord_y2))
+                Great_Input += 1
+
+            else:
+                print("The current coordinate has already been used or not exist \n")
+
         else:
             print("Coordinate number not valid \n")
 
     
-
     Condition(card1, card2, Game_Board, coord_x, coord_y)
     Condition(card1, card2, Game_Board, coord_x2, coord_y2)
 
@@ -120,6 +133,7 @@ while len(Numbers) >= 1:
 
         elif Player_1 == Player_2:
             print("Tie between player 1 and player 2, with  %d points" %(Player_1))
+
 
 
 
