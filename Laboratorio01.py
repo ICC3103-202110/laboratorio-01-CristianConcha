@@ -68,7 +68,6 @@ for row in range(Board_Row // 4):
     Coordinate_Row.append(Coordinate_Column)
 
 
-
 Player_1 = 0
 Player_2 = 0
 Turn = 1
@@ -136,6 +135,7 @@ while len(Numbers) >= 1:
 
         elif Player_1 == Player_2:
             print("Tie between player 1 and player 2, with  %d points" %(Player_1))
+
 
 
 
